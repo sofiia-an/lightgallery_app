@@ -1,0 +1,41 @@
+{% block title %}
+     <title>Light Gallery</title>
+    <h1> Welcome to your account, {{user.username}}</h1>
+    <hr/>
+{% endblock %}
+
+{% block content %}
+<center>
+    <form action="{% url 'searchbar' %}" method="get">
+        <input type="text" name="search"/>
+        <button type="submit">Search</button>
+    </form>
+</center>
+
+{% if user.is_authenticated %}
+    <h1>Upload your picture</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Upload a picture</a></button>
+        <button><a href="{% url 'logout' %}">Logout</a></button>
+    </form>
+{% endif %}
+{% if img_obj%}
+    <h3>Successfully uploaded: {{img_obj.title}}</h3>
+    <img src="{{ img_obj.picture.url }}" alt="connect" style="max-height:300px">
+{% endif %}
+ <hr/>
+ <div class="container">
+     <div class="row">
+         {%for results in Image%}
+         <div class="col-3" style=" text-align: center;">
+             <h3 style="color: navy;">{{results.title}}</h3>
+             <img src="{{results.picture.url}}" height="200" width="300" alt="{{results.title}}" title="{{results.title}}" <br/>
+             <hr/>
+            <b>{{results.img_tag}}</b>
+              <hr/>
+         </div>
+         {%endfor%}
+     </div>
+{% endblock %}

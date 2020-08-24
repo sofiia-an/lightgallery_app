@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Light Gallery</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 style="text-align:center;"><b>LIGHT GALLERY</b></h1>
+    <h1 style="text-align:center;">Here you will be able to check and upload your pictures</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login_url' %}">Login</a>
+        <a href="{% url 'register_url' %}">Register</a>
+    {% endif %}
+ <hr/>
+ <div class="container">
+     <div class="row">
+ {%for results in gallery%}
+         <div class="col-3" style=" text-align: center;">
+ <h3 style="color: navy;">{{results.imgtitle}}</h3>
+ <img src="{{results.image.url}}" height="200" width="300" alt="{{results.imgtitle}}" title="{{results.imgtitle}}" <br/>
+             <hr/>
+            <b>{{results.imgdesc}}</b>
+         </div>
+ {%endfor%}
+     </div>
+</body>
+</html>

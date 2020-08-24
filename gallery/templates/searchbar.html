@@ -1,0 +1,11 @@
+{{ error }}
+
+{% if pic_info %}
+    <center><h1>Search Result Found</h1></center>
+    <br>
+{% for i in pic_info %}
+<center><h2><a href="/dashboard/"{{i.picture}}>{{i.img_tag}}</a></h2></center>
+{% endfor %}
+    {% else %}
+    <center><h1>NOTHING FOUND</h1></center>
+{% endif %}
